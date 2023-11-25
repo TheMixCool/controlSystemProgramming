@@ -25,6 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     blocks/Discrete/discrete.cpp \
+    blocks/SinAnalog/sinanalog.cpp \
+    blocks/SinDiscrete/sindiscrete.cpp \
     blocks/StateSpace/statespace.cpp \
     blocks/integrator/integrator.cpp \
     blocks/simpleSystem/simplesystem.cpp \
@@ -35,6 +37,8 @@ SOURCES += \
 
 HEADERS += \
     blocks/Discrete/discrete.h \
+    blocks/SinAnalog/sinanalog.h \
+    blocks/SinDiscrete/sindiscrete.h \
     blocks/StateSpace/statespace.h \
     blocks/integrator/integrator.h \
     blocks/simpleSystem/simplesystem.h \

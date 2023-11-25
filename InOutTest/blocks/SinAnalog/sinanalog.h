@@ -1,20 +1,19 @@
-#ifndef STATESPACE_H
-#define STATESPACE_H
-
-#include "blocks/integrator/integrator.h"
+#ifndef SINANALOG_H
+#define SINANALOG_H
 #include <vector>
 #include <cstdint>
+#include "blocks/integrator/integrator.h"
 
-class StateSpace
+class SinAnalog
 {
 public:
-    StateSpace(std::vector<float> &m_initial_conditions,
+    SinAnalog(std::vector<float> &initial_conditions,
                std::vector<std::vector<float>> &matrix_A,
                std::vector<float> &matrix_B,
                std::vector<float> &matrix_C,
                std::vector<float> &matrix_D);
 
-    ~StateSpace();
+    ~SinAnalog();
 
     float getOutput();
     float update(float input, float dt);
@@ -22,7 +21,6 @@ public:
 private:
     Integrator *m_integrator_X1;
     Integrator *m_integrator_X2;
-    Integrator *m_integrator_X3;
 
     float m_previous_input = 0.0;
 
@@ -34,4 +32,7 @@ private:
     std::vector<float> m_initial_conditions;
 };
 
-#endif // STATESPACE_H
+#endif // SINANALOG_H
+
+
+

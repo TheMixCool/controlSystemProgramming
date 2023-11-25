@@ -1,17 +1,16 @@
-#ifndef DISCRETE_H
-#define DISCRETE_H
-
+#ifndef SINDISCRETE_H
+#define SINDISCRETE_H
 #include <vector>
 #include <cstdint>
 
-class Discrete
+class SinDiscrete
 {
 public:
-    Discrete(std::vector<float> &initial_conditions,
-             std::vector<std::vector<float>> &matrix_A,
-             std::vector<float> &matrix_B,
-             std::vector<float> &matrix_C,
-             std::vector<float> &matrix_D);
+    SinDiscrete(std::vector<float> &initial_conditions,
+                std::vector<std::vector<float>> &matrix_A,
+                std::vector<float> &matrix_B,
+                std::vector<float> &matrix_C,
+                std::vector<float> &matrix_D);
 
     float getOutput();
 
@@ -28,4 +27,6 @@ private:
     float m_previous_input = 0.0;
 };
 
-#endif // DISCRETE_H
+#endif // SINDISCRETE_H
+
+

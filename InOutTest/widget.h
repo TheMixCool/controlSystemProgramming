@@ -8,6 +8,8 @@
 #include "qcustomplot.h"
 #include "blocks/StateSpace/statespace.h"
 #include "blocks/Discrete/discrete.h"
+#include "blocks/SinAnalog/sinanalog.h"
+#include "blocks/SinDiscrete/sindiscrete.h"
 
 namespace Ui {
 class Widget;
@@ -41,8 +43,11 @@ private:
     // --------------------------
     // Add pointer to the object here
     // --------------------------
-    //StateSpace * m_stateSpace;
+    StateSpace * m_stateSpace;
     Discrete * m_discrete;
+    SinAnalog * m_sinAnalog;
+    SinDiscrete *m_sinDiscrete;
+
     // --------------------------
     // Add pointer to the object here
     // --------------------------

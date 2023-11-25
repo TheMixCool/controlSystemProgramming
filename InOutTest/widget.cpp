@@ -7,7 +7,7 @@
 // Set stop time here
 // --------------------------
 #define ENDOFTIME 25
-#define SAMPLINGTIMEMSEC 10
+#define SAMPLINGTIMEMSEC 200
 // --------------------------
 // Set stop time here
 // --------------------------
@@ -100,13 +100,27 @@ Widget::Widget(QWidget *parent) :
 
     // -----------------------------DISCRETE   100   Hz    ----------------------------------
 
-    std::vector<float> initial_conditions {0.0, 0.0, 0.0};
-    std::vector<std::vector<float>> matrix_A{{0.9801, -0.0199, -0.0099},{0.0099, 0.9999, -0.0000},{0.0000, 0.0100, 1.0000}};
-    std::vector<float> matrix_B {0.0198, 0.0001, 0.0000};
-    std::vector<float> matrix_C {-0.5, -0.5, -0.5};
-    std::vector<float> matrix_D {1};
-    m_discrete = new Discrete(initial_conditions, matrix_A, matrix_B, matrix_C, matrix_D);
+//    std::vector<float> initial_conditions {0.0, 0.0, 0.0};
+//    std::vector<std::vector<float>> matrix_A{{0.9801, -0.0199, -0.0099},{0.0099, 0.9999, -0.0000},{0.0000, 0.0100, 1.0000}};
+//    std::vector<float> matrix_B {0.0198, 0.0001, 0.0000};
+//    std::vector<float> matrix_C {-0.5, -0.5, -0.5};
+//    std::vector<float> matrix_D {1};
+//    m_discrete = new Discrete(initial_conditions, matrix_A, matrix_B, matrix_C, matrix_D);
 
+
+    std::vector<float> initial_conditions {1.7321, 2.0};
+    std::vector<std::vector<float>> matrix_A{{0.0, 1.0},{-4.0, 0.0}};
+    std::vector<float> matrix_B {0.0, 0.0};
+    std::vector<float> matrix_C {1.0, 0.0};
+    std::vector<float> matrix_D {0.0};
+    m_sinAnalog = new SinAnalog(initial_conditions, matrix_A, matrix_B, matrix_C, matrix_D);
+
+//    std::vector<float> initial_conditions {1.7321, 2.0};
+//    std::vector<std::vector<float>> matrix_A{{0.92106, 0.19471},{-0.77884, 0.92106}};
+//    std::vector<float> matrix_B {0.0, 0.0};
+//    std::vector<float> matrix_C {1.0, 0.0};
+//    std::vector<float> matrix_D {0};
+//    m_sinDiscrete = new SinDiscrete(initial_conditions, matrix_A, matrix_B, matrix_C, matrix_D);
     // --------------------------
     // Create the object here
     // --------------------------
@@ -136,7 +150,7 @@ Widget::~Widget()
     // Delete the object here
     // --------------------------
     //delete m_stateSpace;
-    delete m_discrete;
+    //delete m_discrete;
     // --------------------------
     // Delete the object here
     // --------------------------
@@ -149,6 +163,10 @@ void Widget::update() {
 	// --------------------------
     //double signal = std::sin(relativeTime / 1000.0);
     double signal = 2 * std::sin(2 * relativeTime/1000.0 + 1.047) - 2.0;
+
+    //double signal = m_sinAnalog->getOutput();
+    //double signal = m_sinDiscrete->getOutput();
+
     //double signal = 10;
 	// --------------------------
 	// Replace input signal with ours
@@ -172,7 +190,9 @@ void Widget::update() {
 
     inputPlot->graph(0)->addData(relativeTime / 1000.0, signal);
     //outputPlot->graph(0)->addData(relativeTime / 1000.0, m_stateSpace->getOutput());
-    outputPlot->graph(0)->addData(relativeTime / 1000.0, m_discrete->getOutput());
+    //outputPlot->graph(0)->addData(relativeTime / 1000.0, m_discrete->getOutput());
+    outputPlot->graph(0)->addData(relativeTime / 1000.0, m_sinAnalog->getOutput());
+    //outputPlot->graph(0)->addData(relativeTime / 1000.0, m_sinDiscrete->getOutput());
 
     inputPlot->replot();
     outputPlot->replot();
@@ -181,7 +201,9 @@ void Widget::update() {
     // Update the object here
     // --------------------------
     //m_stateSpace->update(signal, dt/1000.0);
-    m_discrete->update(signal);
+    //m_discrete->update(signal);
+    m_sinAnalog->update(signal, dt/1000.0);
+    //m_sinDiscrete->update(m_sinDiscrete->getOutput());
     // --------------------------
     // Update the object here
     // --------------------------
