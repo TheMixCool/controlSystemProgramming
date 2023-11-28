@@ -162,10 +162,10 @@ void Widget::update() {
 	// Replace input signal with ours
 	// --------------------------
     //double signal = std::sin(relativeTime / 1000.0);
-    double signal = 2 * std::sin(2 * relativeTime/1000.0 + 1.047) - 2.0;
+    //double signal = 2 * std::sin(2 * relativeTime/1000.0 + 1.047) - 2.0;
 
     //double signal = m_sinAnalog->getOutput();
-    //double signal = m_sinDiscrete->getOutput();
+    double signal = m_sinDiscrete->getOutput();
 
     //double signal = 10;
 	// --------------------------
